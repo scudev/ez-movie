@@ -1,3 +1,7 @@
+# Custom
+__pycache__/
+redis-data/
+
 # Logs
 logs
 *.log

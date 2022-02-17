@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  ezm-redis:
+    image: redis:latest
+    restart: always
+    container_name: ezm-redis
+    expose:
+      - 6379
+    environment: 
+      TZ: Asia/Shanghai
+    volumes:
+      - ./database/redis.conf:/etc/redis/redis.conf 
+      - ./data/redis-data:/database/redis-data     
+    command: redis-server /etc/redis/redis.conf
+  
+  ezm-backend:
+    # TODO
+  ezm-frontend:
+    # TODO

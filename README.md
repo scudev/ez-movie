@@ -33,4 +33,15 @@ yarn dev
 ```
 
 ### ez-movie-server
+
+使用docker compose构建
+
+```bash
+
+cd server/
+
+sudo docker-compose up -d
+```
+
+
 TODO
