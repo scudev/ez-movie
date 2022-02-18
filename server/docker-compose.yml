@@ -21,7 +21,7 @@ services:
     expose:
       - 9090
     environment:
-      - TZ=Asia/Shanghai
+      TZ: Asia/Shanghai
     depends_on: 
       - ezm-redis
     volumes:
