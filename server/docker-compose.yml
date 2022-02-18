@@ -11,7 +11,7 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - ./database/redis.conf:/etc/redis/redis.conf 
-      - ./data/redis-data:/database/redis-data     
+      - ./database/redis-data:/data/redis-data     
     command: redis-server /etc/redis/redis.conf
   
   ezm-backend:
