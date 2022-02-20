@@ -20,16 +20,16 @@ class OPStatus(Enum):
 
 
 class VideoInfo(BaseModel):
-    uid: str
+    vid: str = '#'
     tag: VideoTag
     info: str
-    created_time: datetime
+    created_time: datetime = None
     auth_info: str = None
 
 
 class OPRecord(BaseModel):
-    uid: str
+    rid: str = '^'
     password: str
-    video_uid: str
-    op_time: datetime
+    vid: str
+    op_time: datetime = None
     status: OPStatus = OPStatus.Init
