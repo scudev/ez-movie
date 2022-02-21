@@ -10,11 +10,27 @@ services:
     environment: 
       TZ: Asia/Shanghai
     volumes:
-      - ./database/redis.conf:/etc/redis/redis.conf 
-      - ./data/redis-data:/database/redis-data     
+      - ./database/redis.conf:/etc/redis/redis.conf
+      - ./database/redis-data:/data/redis-data
     command: redis-server /etc/redis/redis.conf
   
   ezm-backend:
-    # TODO
-  ezm-frontend:
+    build: ./backend
+    restart: always
+    container_name: ezm-backend
+    expose:
+      - 9090
+    environment:
+      TZ: Asia/Shanghai
+    depends_on: 
+      - ezm-redis
+    volumes:
+      - ./backend:/ez-movie/backend
+    command:
+      - /bin/sh
+      - -c
+      - |
+        cd /ez-movie/backend
+        uvicorn server:api --reload --host '0.0.0.0' --port 9090
+  # ezm-frontend:
     # TODO
