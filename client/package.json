@@ -34,5 +34,7 @@
     "vue3",
     "rollup"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@element-plus/icons-vue": "^0.2.7"
+  }
 }
