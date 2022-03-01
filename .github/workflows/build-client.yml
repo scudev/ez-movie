@@ -45,6 +45,7 @@ jobs:
       - name: build windows app
         if: matrix.os == 'windows-latest'
         run: |
+          cd client/
           npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,6 +53,7 @@ jobs:
       - name: build mac app
         if: matrix.os == 'macos-latest'
         run: |
+          cd client/
           npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,6 +61,7 @@ jobs:
       - name: build ubuntu app
         if: matrix.os == 'ubuntu-latest'
         run: |
+          cd client/
           npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,21 +70,24 @@ jobs:
       - name: cleanup artifacts for windows
         if: matrix.os == 'windows-latest'
         run: |
+          cd client/
           npx rimraf "dist_electron/!(*.exe)"
       - name: cleanup artifacts for macos
         if: matrix.os == 'macos-latest'
         run: |
+          cd client/
           npx rimraf "dist_electron/!(*.dmg)"
       - name: cleanup artifacts for ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
+          cd client/
           npx rimraf "dist_electron/!(*.AppImage)"
       # step6: upload artifacts
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}
-          path: dist_electron
+          path: client/dist_electron
 
       # step7: create release
       # - name: release
