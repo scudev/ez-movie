@@ -17,10 +17,9 @@
 
 ### ez-movie-client
 
-使用[**electron-vue-vite**](https://github.com/caoxiemeihao/electron-vue-vite)框架，推荐使用yarn构建
+使用[**electron**](https://www.electronjs.org/) + [**vue2**](https://v2.vuepress.vuejs.org/zh/)框架，推荐使用yarn构建
 
 ```bash
-
 cd client/
 
 # 设置electron镜像，否则容易构建失败
@@ -29,7 +28,11 @@ yarn config set ELECTRON_MIRROR https://npm.taobao.org/mirrors/electron/
 # 安装依赖
 yarn
 
-yarn dev
+# 本地预览
+yarn electron:serve
+
+# 构建
+yarn electron:build
 ```
 
 ### ez-movie-server
