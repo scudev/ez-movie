@@ -5,6 +5,7 @@
   "author": "hx-w <herixth@163.com>",
   "description": "欢迎使用ez-movie",
   "homepage": "https://github.com/scudev/ez-movie",
+  "repository": "github:scudev/ez-movie",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
