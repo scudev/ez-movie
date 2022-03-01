@@ -1,7 +1,8 @@
 # Custom
 __pycache__/
 redis-data/
-
+.vscode/
+dist_electron
 # Logs
 logs
 *.log
