@@ -1,7 +1,7 @@
 # main.yml
 
 # Workflow's name
-name: Build Electron App For Windows/macOs/Ubuntu
+name: Build on Windows/macOs/Ubuntu
 
 # Workflow's trigger
 on:
@@ -39,6 +39,7 @@ jobs:
       # step3: npm install
       - name: npm install
         run: |
+          cd client/
           npm install
       # step4: build app for mac/win
       - name: build windows app
