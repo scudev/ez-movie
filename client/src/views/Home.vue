@@ -45,7 +45,7 @@ export default {
   position: relative;
   height: calc(100% - 28px);
   .download-logo{
-    margin: 80px 0px 50px 0px;
+    margin: 30px 0px 40px 0px;
     img{
       transform: scale(.6);
     }
