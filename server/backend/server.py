@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from fastapi import FastAPI
-
+from src import redis
 api = FastAPI()
 
 
@@ -15,7 +15,8 @@ async def videoDetail(pwd: str):
 
 @api.get('video/list')
 async def videoList(pwd: str):
-    return {'message': 'hello world'}
+    vlist = await redis.rds_fetch_all_list(pwd)
+    return vlist
 
 @api.post('video/status')
 async def videoStatus():

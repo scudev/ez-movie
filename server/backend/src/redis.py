@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import ujson
-import datetime
 import hashlib
+from typing import List, Dict
 import redis
 from .model import *
 
@@ -19,25 +18,6 @@ def hashid(prefix: str, val: str) -> str:
     return prefix + sha1.hexdigest()[:6]
 
 
-async def save_video_info(video_json: dict):
-    video_json['vid'] = hashid('#', video_json['info'])
-    video_json['created_time'] = datetime.datetime.now()
-    video_str = ujson.dumps(video_json)
-    redis_inst.set(video_json['vid'], video_str)
-
-
-async def save_op_record(record_json: dict):
-    record_json['rid'] = hashid(
-        '^', record_json['password'] + record_json['vid'])
-    record_json['op_time'] = datetime.datetime.now()
-    record_json['status'] = OPStatus.Init
-    record_str = ujson.dumps(record_json)
-    redis_inst.set(record_json['rid'], record_str)
-
-
-async def get_video_info(vid: str) -> VideoInfo:
-    return VideoInfo(redis_inst.get(vid))
-
-
-async def change_record_status(rid: str, status: OPStatus) -> bool:
-    pass
+async def rds_fetch_all_list(pwd: str) -> List[Dict]:
+    vids = redis_inst.keys(hashid('^', pwd))
+    return redis_inst.mget(vids)
