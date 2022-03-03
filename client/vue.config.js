@@ -58,7 +58,7 @@ module.exports = {
           modifyVars: {
             // less 全局变量
             // 主色
-            '@primary-color': '#e2c027',
+            '@primary-color': '#10aec2',
             '@link-color': '#e2c027'
           }
         }

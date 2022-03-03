@@ -19,7 +19,7 @@ export default {
       projectName: info.name,
       iconDataMap: {
         '/': {
-          icon: 'download',
+          icon: 'unordered-list',
           route: '/download'
         },
         '/download': {

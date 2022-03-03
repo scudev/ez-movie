@@ -4,8 +4,8 @@
       <img src="../assets/images/logo.png" alt="">
     </div>
     <div class="download-box">
-      <a-input v-model="url" size="large" placeholder="请输入视频地址" @keydown.enter="download">
-        <a-icon slot="addonAfter" :type="loading ? 'loading' : 'arrow-down'" class="icon" @click="download" />
+      <a-input v-model="url" size="large" placeholder="请输入静态口令" @keydown.enter="download">
+        <a-icon slot="addonAfter" :type="loading ? 'loading' : 'link'" class="icon" @click="download" />
       </a-input>
     </div>
     <div class="setting" v-if="$route.path === '/'">
