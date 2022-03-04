@@ -32,7 +32,7 @@ export default {
   created() {},
   methods: {
     async queryVideoListByPwd() {
-      this.$http.getData("/video/list", { pwd: this.pwd }).then((val) => {
+      this.$http.getData("/v/list", { pwd: this.pwd }).then((val) => {
         console.log(val);
       });
     },

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apihost = "http://121.40.123.93";
+const apihost = "http://121.40.123.93:9092";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 
@@ -20,7 +20,6 @@ export function post(action, params) {
 
 export function get(action, params) {
   return new Promise((resolve, reject) => {
-    console.log(params)
     axios
       .get(apihost + action, { params: params })
       .then((response) => {
