@@ -8,22 +8,28 @@ class VideoTag(Enum):
     OnlineFree = 0
     OnlineAuth = 1
     Offline = 2
+    def __int__(self):
+        return self.value
 
 
 class OPStatus(Enum):
-    Init = auto()
-    Working = auto()
-    Succeed = auto()
-    Timeout = auto()
-    Refused = auto()
-    Failed = auto()
+    Init = 0
+    Working = 1
+    Succeed = 2
+    Timeout = 3
+    Refused = 4
+    Failed = 5
+    def __int__(self):
+        return self.value
 
 
 class VideoInfo(BaseModel):
     vid: str = '#'
-    tag: VideoTag
+    tag: int
     info: str
-    created_time: datetime = None
+    name: str
+    brief: str
+    created_time: str = None
     auth_info: str = None
 
 
@@ -31,5 +37,5 @@ class OPRecord(BaseModel):
     rid: str = '^'
     password: str
     vid: str
-    op_time: datetime = None
-    status: OPStatus = OPStatus.Init
+    op_time: str = None
+    status: int = OPStatus.Init
