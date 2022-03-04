@@ -5,9 +5,9 @@ from pydantic import BaseModel
 
 
 class VideoTag(Enum):
-    OnlineFree = auto()
-    OnlineAuth = auto()
-    Offline = auto()
+    OnlineFree = 0
+    OnlineAuth = 1
+    Offline = 2
 
 
 class OPStatus(Enum):
