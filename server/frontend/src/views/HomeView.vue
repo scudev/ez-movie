@@ -1,8 +1,18 @@
 <template>
   <div class="container">
     <div class="download-box">
-      <a-input v-model="url" size="large" placeholder="请输入静态口令" @keydown.enter="download">
-        <a-icon slot="addonAfter" :type="loading ? 'loading' : 'link'" class="icon" @click="download" />
+      <a-input
+        v-model="pwd"
+        size="large"
+        placeholder="请输入静态口令"
+        @keydown.enter="queryVideoListByPwd"
+      >
+        <a-icon
+          slot="addonAfter"
+          :type="loading ? 'loading' : 'link'"
+          class="icon"
+          @click="queryVideoListByPwd"
+        />
       </a-input>
     </div>
   </div>
@@ -10,42 +20,45 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      url: '',
-      loading: false
-    }
+      pwd: "",
+      loading: false,
+    };
   },
   computed: {},
   watch: {},
-  mounted () {},
-  created () {},
+  mounted() {},
+  created() {},
   methods: {
-    async download () {
-    }
-  }
-}
+    async queryVideoListByPwd() {
+      this.$http.getData("/video/list", { pwd: this.pwd }).then((val) => {
+        console.log(val);
+      });
+    },
+  },
+};
 </script>
 
 <style scoped lang="less">
-.container{
+.container {
   box-sizing: border-box;
   padding: 16px;
   position: relative;
   height: calc(100% - 28px);
-  .download-logo{
+  .download-logo {
     margin: 30px 0px 40px 0px;
-    img{
-      transform: scale(.6);
+    img {
+      transform: scale(0.6);
     }
   }
-  .download-box{
+  .download-box {
     padding: 0px 64px;
-    /deep/ .ant-input-group-addon{
+    /deep/ .ant-input-group-addon {
       background: @primary-color;
       border: none;
     }
-    .icon{
+    .icon {
       color: #ffffff;
       font-size: 18px;
     }
