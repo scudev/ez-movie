@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from fastapi import FastAPI
+# for test
+from fastapi.middleware.cors import CORSMiddleware
+
 from src import redis
 api = FastAPI()
 
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=['GET', 'POST']
+)
 
 @api.get('/')
 async def root():
