@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src import redis
 from src import model
 
-api = FastAPI()
+api = FastAPI(docs_url=None, redoc_url=None)
 
 api.add_middleware(
     CORSMiddleware,
