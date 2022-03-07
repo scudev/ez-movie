@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apihost = "http://121.40.123.93:9092";
+const apihost = "http://121.40.123.93/api";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 
