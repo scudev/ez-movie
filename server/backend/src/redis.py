@@ -55,7 +55,7 @@ async def rds_save_record(pwd: str, vid: str, status: OPStatus) -> str:
 async def rds_get_video(vid: str) -> dict:
     vinfo = redis_inst.get(vid)
     assert vinfo, 'vid not found'
-    vinfo_dict = ujson.loads(vinfo_dict)
+    vinfo_dict = ujson.loads(vinfo)
     return vinfo_dict
 
 
