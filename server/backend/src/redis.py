@@ -27,7 +27,7 @@ async def rds_fetch_all_list(pwd: str) -> List[Dict]:
     oplist = map(lambda x: ujson.loads(x), redis_inst.mget(rids))
     reslist = []
     for op in oplist:
-        reslist.append({**oplist, **await rds_get_video(op['vid'])})
+        reslist.append({**op, **(await rds_get_video(op['vid']))})
     return reslist
 
 
