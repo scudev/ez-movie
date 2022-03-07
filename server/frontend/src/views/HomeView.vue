@@ -20,9 +20,9 @@
         <a-icon type="logout" class="icon" @click="logout()" />
       </div>
       <a-button class="submit-button" type="primary" icon="check-circle" @click="$refs.submitModal.show()">
-        提交记录
+        添加记录
       </a-button>
-      <submit-modal ref="submitModal" />
+      <submit-modal ref="submitModal" @refreshVList="queryVideoListByPwd" />
     </div>
   </div>
 </template>
@@ -43,11 +43,14 @@ export default {
   mounted() {
     this.pwd = this.$cookies.get('ezm-server-pwd')
     this.authed = (this.pwd != null)
+    if (this.authed) {
+      this.queryVideoListByPwd();
+    }
   },
   created() {},
   methods: {
     async queryVideoListByPwd() {
-      this.$cookies.remove('ezm-server-pwd')
+      // this.$cookies.remove('ezm-server-pwd')
       this.$cookies.set('ezm-server-pwd', this.pwd)
       this.authed = true
       this.$http.getData("/v/list", { pwd: this.pwd }).then((val) => {

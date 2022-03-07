@@ -108,7 +108,7 @@ export default {
               this.confirmLoading = false;
               this.visible = false;
               // fetch new list
-              this.$http.getData("/v/list", { pwd: pwd });
+              this.$emit('refreshVList', 'refresh')
             })
             .catch((err) => {
               this.$message.error(`数据提交失败：${err}`, 5);
