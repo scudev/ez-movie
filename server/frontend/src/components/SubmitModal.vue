@@ -98,7 +98,6 @@ export default {
     doSubmit(e) {
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
           this.confirmLoading = true;
           const pwd = this.$cookies.get("ezm-server-pwd");
           this.$http
