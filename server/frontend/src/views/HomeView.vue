@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="download-box">
+    <div class="show-box" v-if="!authed">
       <a-input
         v-model="pwd"
         size="large"
@@ -9,11 +9,17 @@
       >
         <a-icon
           slot="addonAfter"
-          :type="loading ? 'loading' : 'link'"
+          :type="'link'"
           class="icon"
           @click="queryVideoListByPwd"
         />
       </a-input>
+    </div>
+    <div class="show-box" v-else>
+      authed
+      <div class="logout-icon">
+        <a-icon type="logout" class="icon" @click="logout()" />
+      </div>
     </div>
   </div>
 </template>
@@ -23,19 +29,29 @@ export default {
   data() {
     return {
       pwd: "",
-      loading: false,
+      authed: false
     };
   },
   computed: {},
   watch: {},
-  mounted() {},
+  mounted() {
+    this.pwd = this.$cookies.get('ezm-server-pwd')
+    this.authed = (this.pwd != null)
+  },
   created() {},
   methods: {
     async queryVideoListByPwd() {
+      this.$cookies.remove('ezm-server-pwd')
+      this.$cookies.set('ezm-server-pwd', this.pwd)
+      this.authed = true
       this.$http.getData("/v/list", { pwd: this.pwd }).then((val) => {
         console.log(val);
       });
     },
+    logout() {
+      this.$cookies.remove('ezm-server-pwd')
+      this.authed = false
+    }
   },
 };
 </script>
@@ -43,17 +59,11 @@ export default {
 <style scoped lang="less">
 .container {
   box-sizing: border-box;
-  padding: 16px;
+  padding: 32px;
   position: relative;
   height: calc(100% - 28px);
-  .download-logo {
-    margin: 30px 0px 40px 0px;
-    img {
-      transform: scale(0.6);
-    }
-  }
-  .download-box {
-    padding: 0px 64px;
+  .show-box {
+    padding: 80px 80px;
     /deep/ .ant-input-group-addon {
       background: @primary-color;
       border: none;
@@ -61,6 +71,17 @@ export default {
     .icon {
       color: #ffffff;
       font-size: 18px;
+    }
+  }
+  .logout-icon{
+    position: absolute;
+    bottom: 180px;
+    right: 64px;
+    z-index: 99;
+    cursor: pointer;
+    .icon{
+      font-size: 28px;
+      color: @primary-color;
     }
   }
 }

@@ -1,11 +1,14 @@
 <template>
   <div id="app">
+    <layout-header />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import LayoutHeader from './components/LayoutHeader'
 export default {
+  components: { LayoutHeader },
   mounted() {}
 }
 </script>
