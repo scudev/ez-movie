@@ -35,7 +35,7 @@
             ]"
           />
         </a-form-item>
-        <a-form-item label="视频源类型">
+        <a-form-item label="片源类型">
           <a-select
             v-decorator="[
               'tag',
@@ -46,9 +46,13 @@
             placeholder="请选择视频源的类型"
             @change="handleSelectChange"
           >
-            <a-select-option value="0"> 在线免认证片源 </a-select-option>
-            <a-select-option value="1"> 在线需认证片源 </a-select-option>
-            <a-select-option value="2"> 离线片源 </a-select-option>
+            <a-select-option
+              v-for="tag in this.videoTags"
+              :key="tag.index"
+              :value="tag.index"
+            >
+              {{ tag.label }}
+            </a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item label="视频简介">
@@ -75,6 +79,11 @@ export default {
       confirmLoading: false,
       formLayout: "horizontal",
       form: this.$form.createForm(this, { name: "coordinated" }),
+      videoTags: [
+        { index: 0, label: "在线免认证片源" },
+        { index: 1, label: "在线需认证片源" },
+        { index: 2, label: "离线片源" },
+      ],
     };
   },
   methods: {
@@ -99,8 +108,7 @@ export default {
               this.confirmLoading = false;
               this.visible = false;
               // fetch new list
-              this.$http
-                .getData('/v/list', {pwd: pwd})
+              this.$http.getData("/v/list", { pwd: pwd });
             })
             .catch((err) => {
               this.$message.error(`数据提交失败：${err}`, 5);
