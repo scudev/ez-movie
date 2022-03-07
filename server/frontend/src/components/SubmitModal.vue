@@ -96,9 +96,11 @@ export default {
             .postData(`/op/add_new?pwd=${pwd}`, values)
             .then((val) => {
               this.$message.success("数据提交成功", 5);
-              console.log(val);
               this.confirmLoading = false;
               this.visible = false;
+              // fetch new list
+              this.$http
+                .getData('/v/list', {pwd: pwd})
             })
             .catch((err) => {
               this.$message.error(`数据提交失败：${err}`, 5);
