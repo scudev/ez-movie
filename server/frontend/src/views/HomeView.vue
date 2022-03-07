@@ -16,16 +16,22 @@
       </a-input>
     </div>
     <div class="show-box" v-else>
-      authed
       <div class="logout-icon">
         <a-icon type="logout" class="icon" @click="logout()" />
       </div>
+      <a-button class="submit-button" type="primary" icon="check-circle" @click="$refs.submitModal.show()">
+        提交记录
+      </a-button>
+      <submit-modal ref="submitModal" />
     </div>
   </div>
 </template>
 
 <script>
+import SubmitModal from '../components/SubmitModal.vue'
+
 export default {
+  components: { SubmitModal },
   data() {
     return {
       pwd: "",
@@ -83,6 +89,10 @@ export default {
       font-size: 28px;
       color: @primary-color;
     }
+  }
+  .submit-button{
+    position: relative;
+    background: #68a81f;
   }
 }
 </style>
