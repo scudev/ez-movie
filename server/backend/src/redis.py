@@ -23,8 +23,12 @@ def hashid(prefix: str, val: str) -> str:
 
 
 async def rds_fetch_all_list(pwd: str) -> List[Dict]:
-    vids = redis_inst.keys(hashid('^', pwd) + '*')
-    return redis_inst.mget(vids)
+    rids = redis_inst.keys(hashid('^', pwd) + '*')
+    oplist = map(lambda x: ujson.loads(x), redis_inst.mget(rids))
+    reslist = []
+    for op in oplist:
+        reslist.append({**op, **(await rds_get_video(op['vid']))})
+    return reslist
 
 
 async def rds_save_video(vinfo: VideoInfo) -> str:
@@ -51,7 +55,7 @@ async def rds_save_record(pwd: str, vid: str, status: OPStatus) -> str:
 async def rds_get_video(vid: str) -> dict:
     vinfo = redis_inst.get(vid)
     assert vinfo, 'vid not found'
-    vinfo_dict = ujson.loads(vinfo_dict)
+    vinfo_dict = ujson.loads(vinfo)
     return vinfo_dict
 
 
