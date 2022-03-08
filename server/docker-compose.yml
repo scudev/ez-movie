@@ -11,9 +11,8 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - ./database/redis.conf:/etc/redis/redis.conf
-      - ./database/redis-data:/data/redis-data
+      - ./database/redis-data:/data
     command: redis-server /etc/redis/redis.conf
-  
   ezm-backend:
     build: ./backend
     restart: always
@@ -33,7 +32,6 @@ services:
         cd /ez-movie/backend
         uvicorn server:api --reload --host '0.0.0.0' --port 8000
   ezm-frontend:
-    # TODO
     image: nginx:latest
     restart: always
     container_name: ezm-frontend
