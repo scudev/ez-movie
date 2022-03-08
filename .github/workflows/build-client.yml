@@ -89,7 +89,7 @@ jobs:
           name: ${{ matrix.os }}
           path: client/dist_electron
 
-      step7: create release
+      # step7: create release
       - name: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
