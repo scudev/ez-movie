@@ -52,7 +52,6 @@ export default {
       got("https://api.github.com/repos/scudev/ez-movie/releases/latest", {
         responseType: "json",
       }).then((res) => {
-        console.log(res.body.tag_name);
         this.newVersion = res.body.tag_name.substr(1);
         this.htmlUrl = res.body.html_url;
         this.updateContent = res.body.body;
