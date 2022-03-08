@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   ezm-redis:
@@ -7,12 +7,13 @@ services:
     container_name: ezm-redis
     expose:
       - 6379
-    environment: 
+    environment:
       TZ: Asia/Shanghai
     volumes:
       - ./database/redis.conf:/etc/redis/redis.conf
       - ./database/redis-data:/data
     command: redis-server /etc/redis/redis.conf
+
   ezm-backend:
     build: ./backend
     restart: always
@@ -21,7 +22,7 @@ services:
       - 8000
     environment:
       TZ: Asia/Shanghai
-    depends_on: 
+    depends_on:
       - ezm-redis
     volumes:
       - ./backend:/ez-movie/backend
@@ -31,6 +32,7 @@ services:
       - |
         cd /ez-movie/backend
         uvicorn server:api --reload --host '0.0.0.0' --port 8000
+
   ezm-frontend:
     image: nginx:latest
     restart: always
