@@ -21,6 +21,10 @@ module.exports = {
         'import/first': 'off',
         'camelcase': 'off',
         'dot-notation': 'off',
-        'one-var': 'off'
+        'one-var': 'off',
+        'semi': 'off',
+        'quotes': 'off',
+        'space-before-function-paren': 'off',
+        'comma-dangle': 'off'
     }
 }

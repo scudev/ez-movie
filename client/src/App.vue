@@ -23,6 +23,7 @@ export default {
   computed: {},
   watch: {},
   mounted () {
+    this.$checkUpdate.checkUpdate()
   },
   created () {},
   methods: {}
