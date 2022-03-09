@@ -10,9 +10,9 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/download',
-    name: 'Download',
-    component: () => import('../views/Download.vue')
+    path: '/explore',
+    name: 'Explore',
+    component: () => import('../views/Explore.vue')
   }
 ]
 

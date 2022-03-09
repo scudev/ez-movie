@@ -41,11 +41,10 @@ async function createWindow () {
     width: 800,
     height: 600,
     resizable: false,
-    title: 'ez-movie-client',
+    title: '爱看电影-客户端',
     center: true,
     frame: false,
     webPreferences: {
-
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
@@ -193,28 +192,6 @@ app.on('ready', async () => {
   // 最小化软件
   ipcMain.on('minimize-window', (event, arg) => {
     win.minimize()
-  })
-
-  // 删除视频
-  ipcMain.on('open-delete-video-dialog', (event, arg) => {
-    console.log(arg.length)
-    dialog.showMessageBox(win, {
-      type: 'info',
-      title: '提示',
-      message: `当前选中${arg.length}个任务，你确定要删除吗？`,
-      checkboxLabel: '同时删除文件',
-      buttons: ['取消', '删除']
-    })
-      .then(res => {
-        console.log(res)
-        event.reply('delete-video-dialog-reply', {
-          result: res,
-          videoInfo: arg
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
   })
 
   // 打开浏览器
