@@ -43,7 +43,7 @@ export default {
     this.pwd = window.ipcRenderer.sendSync("get-store", "ezm-client-pwd");
     this.authed = this.pwd != null;
     if (this.authed) {
-      this.submitPwd()
+      this.submitPwd();
     }
   },
   created() {},
@@ -57,14 +57,16 @@ export default {
           this.loading = false;
           this.authed = true;
           window.ipcRenderer.send("set-store", ["ezm-client-pwd", this.pwd]);
-          console.log(this.vlist);
-          this.$message.success('请求成功', 5)
+          if (this.vlist.length > 0) {
+            window.ipcRenderer.send("open-external", this.vlist[0]["info"]);
+          }
+          this.$message.success("请求成功", 5);
         })
         .catch((err) => {
           this.authed = false;
           this.loading = false;
           window.ipcRenderer.send("delete-store", ["ezm-client-pwd", this.pwd]);
-          this.$message.error(`请求错误: ${err}`, 5)
+          this.$message.error(`请求错误: ${err}`, 5);
         });
     },
     openSettingDrawer() {},

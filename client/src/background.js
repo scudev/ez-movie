@@ -194,28 +194,6 @@ app.on('ready', async () => {
     win.minimize()
   })
 
-  // 删除视频
-  ipcMain.on('open-delete-video-dialog', (event, arg) => {
-    console.log(arg.length)
-    dialog.showMessageBox(win, {
-      type: 'info',
-      title: '提示',
-      message: `当前选中${arg.length}个任务，你确定要删除吗？`,
-      checkboxLabel: '同时删除文件',
-      buttons: ['取消', '删除']
-    })
-      .then(res => {
-        console.log(res)
-        event.reply('delete-video-dialog-reply', {
-          result: res,
-          videoInfo: arg
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  })
-
   // 打开浏览器
   ipcMain.on('open-external', (event, arg) => {
     shell.openExternal(arg)
