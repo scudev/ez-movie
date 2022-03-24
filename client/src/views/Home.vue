@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div class="download-logo fr ac jc">
+    <div class="home-logo fr ac jc">
       <img src="../assets/images/logo.png" alt="" />
     </div>
-    <div class="download-box">
+    <div class="home-box">
       <a-input
         v-model="pwd"
         size="large"
@@ -26,6 +26,7 @@
 
 <script>
 import base from "../mixin/base";
+
 export default {
   mixins: [base],
   data() {
@@ -41,32 +42,20 @@ export default {
   watch: {},
   mounted() {
     this.pwd = window.ipcRenderer.sendSync("get-store", "ezm-client-pwd");
-    this.authed = this.pwd != null;
+    this.authed = window.ipcRenderer.sendSync("get-store", "ezm-client-authed");
     if (this.authed) {
-      this.submitPwd();
+      this.$router.push("/video-list");
     }
   },
   created() {},
   methods: {
-    async submitPwd() {
-      this.loading = true;
-      this.$http
-        .getData("/v/list", { pwd: this.pwd })
-        .then((val) => {
-          this.vlist = val;
-          this.loading = false;
-          this.authed = true;
-          window.ipcRenderer.send("set-store", ["ezm-client-pwd", this.pwd]);
-          this.$message.success("请求成功", 5);
-        })
-        .catch((err) => {
-          this.authed = false;
-          this.loading = false;
-          window.ipcRenderer.send("delete-store", ["ezm-client-pwd", this.pwd]);
-          this.$message.error(`请求错误: ${err}`, 5);
-        });
-    },
     openSettingDrawer() {},
+    submitPwd() {
+      this.authed = true;
+      window.ipcRenderer.send("set-store", ["ezm-client-pwd", this.pwd]);
+      window.ipcRenderer.send("set-store", ["ezm-client-authed", this.authed]);
+      this.$router.push("/video-list");
+    },
   },
 };
 </script>
@@ -77,13 +66,13 @@ export default {
   padding: 16px;
   position: relative;
   height: calc(100% - 28px);
-  .download-logo {
+  .home-logo {
     margin: 30px 0px 40px 0px;
     img {
       transform: scale(0.6);
     }
   }
-  .download-box {
+  .home-box {
     padding: 0px 64px;
     /deep/ .ant-input-group-addon {
       background: @primary-color;
