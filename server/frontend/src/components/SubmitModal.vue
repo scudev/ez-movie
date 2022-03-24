@@ -55,7 +55,7 @@
             </a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item label="视频简介">
+        <a-form-item label="视频源">
           <a-textarea
             placeholder="请输入片源：在线链接 或 磁力链接"
             :auto-size="{ minRows: 2, maxRows: 6 }"
