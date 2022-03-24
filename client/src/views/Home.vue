@@ -57,9 +57,6 @@ export default {
           this.loading = false;
           this.authed = true;
           window.ipcRenderer.send("set-store", ["ezm-client-pwd", this.pwd]);
-          if (this.vlist.length > 0) {
-            window.ipcRenderer.send("open-external", this.vlist[0]["info"]);
-          }
           this.$message.success("请求成功", 5);
         })
         .catch((err) => {

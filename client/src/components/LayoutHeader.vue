@@ -12,11 +12,10 @@
 </template>
 
 <script>
-const info = require('../../package.json')
 export default {
   data () {
     return {
-      projectName: info.name,
+      projectName: "爱看电影",
       iconDataMap: {
         '/': {
           icon: 'unordered-list',
